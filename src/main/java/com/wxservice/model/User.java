@@ -1,27 +1,37 @@
 package com.wxservice.model;
 
 public class User {
-    private String userName;
-    private String password;
+    private String innerId;
+    private String id;
+    private String name;
 
-    public User(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
+    public User(String innerId, String id, String name) {
+        this.innerId = innerId;
+        this.id = id;
+        this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getInnerId() {
+        return innerId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setInnerId(String innerId) {
+        this.innerId = innerId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,24 +1,17 @@
-CREATE DATABASE weixin;
-USE weixin;
-CREATE TABLE `users` (
-  `USER_ID` VARCHAR(40) NOT NULL,
-  `USERNAME` VARCHAR(45) NOT NULL,
-  `PASSWORD` VARCHAR(45) NOT NULL,
-  `ENABLED` tinyint(1) NOT NULL,
-  PRIMARY KEY (`USER_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create database weixin;
+use weixin;
 
-CREATE TABLE `user_roles` (
-  `USER_ROLE_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `USER_ID` VARCHAR(40) NOT NULL,
-  `AUTHORITY` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`USER_ROLE_ID`),
-  KEY `FK_user_roles` (`USER_ID`),
-  CONSTRAINT `FK_user_roles` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table user (
+  user_inner_id varchar(40) not null,
+  user_id varchar(40) not null,
+  username varchar(45) not null,
+  primary key (user_inner_id)
+) engine=innodb default charset=utf8;
 
--- INSERT INTO weixin.users (USER_ID, USERNAME,PASSWORD, ENABLED) VALUES (100, 'firstuser', '123456', TRUE);
--- INSERT INTO weixin.user_roles (USER_ROLE_ID, USER_ID,AUTHORITY) VALUES (1, 100, 'ROLE_USER');
---
--- INSERT INTO weixin.users (USER_ID, USERNAME,PASSWORD, ENABLED) VALUES (101, 'test', 'test', TRUE);
--- INSERT INTO weixin.user_roles (USER_ROLE_ID, USER_ID,AUTHORITY) VALUES (2, 101, 'ROLE_USER');
+create table answers (
+  user_inner_id varchar(40) not null,
+  questions_set_name varchar(128) not null,
+  questions_answers varchar(1024) not null,
+  time_consuming long
+) engine=innodb default charset=utf8;
+
