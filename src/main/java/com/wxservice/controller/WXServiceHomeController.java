@@ -1,5 +1,7 @@
 package com.wxservice.controller;
 
+import com.wxservice.ItemPool.ItemsService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +14,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.Map;
 
 
 @Controller
 @RequestMapping("/")
 public class WXServiceHomeController {
+    private static Logger logger = Logger.getLogger(WXServiceHomeController.class);
+
     @Resource(name="coreService")
     private CoreService coreService;
 
@@ -40,7 +45,8 @@ public class WXServiceHomeController {
 
         String respMessage = coreService.processRequest(request);
 
-        System.out.println("response message is " + respMessage);
+        logger.debug("response message is " + respMessage);
+
         PrintWriter out = null;
         try {
             out = response.getWriter();

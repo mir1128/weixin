@@ -13,7 +13,7 @@
         <beans:property name="username" value="root"/>
     </beans:bean>
 
-    <beans:bean id="userDAO" class="com.wxservice.dao.impl.UserDaoImpl">
+    <beans:bean id="userDAO" class="com.wxservice.dao.impl.UserDAOImpl">
         <beans:property name="dataSource" ref="dataSource" />
     </beans:bean>
 

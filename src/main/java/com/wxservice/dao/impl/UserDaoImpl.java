@@ -3,7 +3,19 @@ package com.wxservice.dao.impl;
 import com.wxservice.dao.UserDAO;
 import com.wxservice.model.User;
 
-public class UserDaoImpl implements UserDAO {
+import javax.sql.DataSource;
+
+public class UserDAOImpl implements UserDAO {
+    private DataSource dataSource;
+
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Override
     public void insert(User user) {
 

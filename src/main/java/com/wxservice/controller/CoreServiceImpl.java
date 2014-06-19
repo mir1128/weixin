@@ -1,10 +1,13 @@
 package com.wxservice.controller;
 
+import com.wxservice.ItemPool.ItemsService;
 import com.wxservice.common.Constant;
 import com.wxservice.common.MessageUtil;
 import com.wxservice.common.response.TextResponseMessage;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 import java.util.Date;
@@ -12,6 +15,13 @@ import java.util.Map;
 
 @Service("coreService")
 public class CoreServiceImpl implements CoreService {
+    private static Logger logger = Logger.getLogger(CoreServiceImpl.class);
+
+    private ClientMessageProcessor clientMessageProcessor;
+
+    @Resource(name="itemsService")
+    private ItemsService itemsService;
+
     @Override
     public String processRequest(HttpServletRequest request) {
         String respMessage = null;
@@ -28,25 +38,18 @@ public class CoreServiceImpl implements CoreService {
             textMessage.setCreateTime(new Date().getTime());
             textMessage.setMsgType(Constant.RESP_MESSAGE_TYPE_TEXT);
             textMessage.setFuncFlag(0);
-            if (msgType.equals(Constant.REQ_MESSAGE_TYPE_TEXT)) {
+
+            logger.info("the charset is: " + Charset.defaultCharset());
+
+            if (!msgType.equals(Constant.REQ_MESSAGE_TYPE_TEXT)) {
+                logger.info("receive a none text message, type is: " + msgType);
+            } else {
                 String content = requestMap.get("Content");
-
-                System.out.println(Charset.defaultCharset());
-
-                if ("1".equals(content)) {
-                    textMessage.setContent(new String("中文".getBytes(), "UTF-8"));
-                    respMessage = MessageUtil.textMessageToXml(textMessage);
-                }else if ("2".equals(content)) {
-                    textMessage.setContent(new String("小鸡炖蘑菇".getBytes(), "UTF-8"));
-                    respMessage = MessageUtil.textMessageToXml(textMessage);
-                }
+                logger.info("receive text message from: " + fromUserName + "and the content is: " + content);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return respMessage;
-
     }
-
 }
