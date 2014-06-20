@@ -5,5 +5,5 @@ import com.common.ConfigureService;
 import java.util.Map;
 
 public interface ItemsService {
-    Map<String, String> loadItems();
+    Map<Integer, String> loadItems();
 }

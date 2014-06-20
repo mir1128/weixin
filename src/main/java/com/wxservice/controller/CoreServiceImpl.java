@@ -47,6 +47,8 @@ public class CoreServiceImpl implements CoreService {
                 String content = requestMap.get("Content");
                 logger.info("receive text message from: " + fromUserName + "and the content is: " + content);
             }
+
+            itemsService.loadItems();
         } catch (Exception e) {
             e.printStackTrace();
         }
