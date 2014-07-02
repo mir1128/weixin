@@ -27,5 +27,4 @@
         <constructor-arg ref="configureProperties"/>
     </bean>
 
-
 </beans>

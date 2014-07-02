@@ -42,9 +42,7 @@ public class WXServiceHomeController {
             e.printStackTrace();
         }
         response.setCharacterEncoding("UTF-8");
-
         String respMessage = coreService.processRequest(request);
-
         logger.debug("response message is " + respMessage);
 
         PrintWriter out = null;
@@ -55,7 +53,6 @@ public class WXServiceHomeController {
             e.printStackTrace();
         } finally {
             out.close();
-            out = null;
         }
     }
 

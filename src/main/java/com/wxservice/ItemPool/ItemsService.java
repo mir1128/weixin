@@ -2,8 +2,10 @@ package com.wxservice.ItemPool;
 
 import com.common.ConfigureService;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 public interface ItemsService {
-    Map<Integer, Item> loadItems();
+    void loadItems() throws IOException;
 }

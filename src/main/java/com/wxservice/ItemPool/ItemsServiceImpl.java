@@ -20,43 +20,45 @@ public class ItemsServiceImpl implements ItemsService {
 
     private ConfigureService configureService;
 
+    private Map<Integer, Item> questionSet = new HashMap<Integer, Item>();
+
+    public Map<Integer, Item> getQuestionSet() {
+        return questionSet;
+    }
+
     @Autowired
     public ItemsServiceImpl(ConfigureService configureService) {
         this.configureService = configureService;
-    }
-
-    @Override
-    public Map<Integer, Item> loadItems() {
-        String questionSetFileName = configureService.getConfigure("questions_set");
-        return parseQuestionFile(questionSetFileName);
-    }
-
-    private Map<Integer, Item> parseQuestionFile(String questionFile) {
-        List<String[]> fileContent=new ArrayList<String[]>();
-        Map<Integer, Item> results = new HashMap<Integer, Item>();
-
         try {
-            CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(questionFile), "UTF-8"));
-            fileContent = reader.readAll();
-
-            int index = 0;
-            for (String[] line : fileContent){
-                Item item = new Item();
-                item.setQuestion(line[0]);
-
-                for (int i = 1; i < line.length-1; ++i){
-                    item.addOptions(line[i]);
-                }
-
-                item.setAnswer(line[line.length-1]);
-
-                results.put(index++, item);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            loadItems();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return results;
+    }
+
+    @Override
+    public void loadItems() throws IOException {
+        String questionSetFileName = configureService.getConfigure("questions_set");
+        parseQuestionFile(questionSetFileName);
+    }
+
+    private void parseQuestionFile(String questionFile) throws IOException {
+        List<String[]> fileContent = null;
+
+        CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(questionFile), "UTF-8"));
+        fileContent = reader.readAll();
+
+        int index = 0;
+        for (String[] line : fileContent) {
+            Item item = new Item();
+            item.setQuestion(line[0]);
+
+            for (int i = 1; i < line.length - 1; ++i) {
+                item.addOptions(line[i]);
+            }
+            item.setAnswer(line[line.length - 1]);
+            questionSet.put(index++, item);
+        }
+
     }
 }

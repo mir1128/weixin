@@ -1,13 +1,11 @@
 package com.wxservice.controller;
 
-import com.wxservice.ItemPool.ItemsService;
 import com.wxservice.common.Constant;
 import com.wxservice.common.MessageUtil;
 import com.wxservice.common.response.TextResponseMessage;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 import java.util.Date;
@@ -18,9 +16,6 @@ public class CoreServiceImpl implements CoreService {
     private static Logger logger = Logger.getLogger(CoreServiceImpl.class);
 
     private ClientMessageProcessor clientMessageProcessor;
-
-    @Resource(name="itemsService")
-    private ItemsService itemsService;
 
     @Override
     public String processRequest(HttpServletRequest request) {
@@ -48,7 +43,6 @@ public class CoreServiceImpl implements CoreService {
                 logger.info("receive text message from: " + fromUserName + "and the content is: " + content);
             }
 
-            itemsService.loadItems();
         } catch (Exception e) {
             e.printStackTrace();
         }
