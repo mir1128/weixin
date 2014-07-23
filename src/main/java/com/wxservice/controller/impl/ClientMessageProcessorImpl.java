@@ -21,24 +21,6 @@ public class ClientMessageProcessorImpl implements ClientMessageProcessor {
 
     @Override
     public String processClientMessage(String content, String userInnerId) {
-        if (!content.equalsIgnoreCase("dt")){
-            return BEGIN_WHEN_REPLY_DT;
-        }
-        else {
-            Map<Integer, Item> questionsSet = itemsService.getQuestionSet();
-            if (userStatus.containsKey(userInnerId)){
-                int index = userStatus.get(userInnerId);
-                if (questionsSet.containsKey(index)){
-                    userStatus.put(userInnerId, index+1);
-                    return questionsSet.get(++index).getQuestion();
-                }
-                else {
-                    return questionsSet.get(0).getQuestion();
-                }
-            }
-            else {
-                return questionsSet.get(0).getQuestion();
-            }
-        }
+        return null;
     }
 }
