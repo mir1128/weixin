@@ -11,6 +11,6 @@ public class UserContextDAOImpl implements UserContextDAO {
 
     @Override
     public void insert(UserContext userContext) {
-        
+
     }
 }
