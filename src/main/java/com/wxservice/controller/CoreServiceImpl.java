@@ -3,9 +3,11 @@ package com.wxservice.controller;
 import com.wxservice.common.Constant;
 import com.wxservice.common.MessageUtil;
 import com.wxservice.common.response.TextResponseMessage;
+import com.wxservice.controller.impl.ClientMessageProcessorImpl;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 import java.util.Date;
@@ -15,6 +17,7 @@ import java.util.Map;
 public class CoreServiceImpl implements CoreService {
     private static Logger logger = Logger.getLogger(CoreServiceImpl.class);
 
+    @Resource(name="clientMessageProcessor")
     private ClientMessageProcessor clientMessageProcessor;
 
     @Override
@@ -40,6 +43,9 @@ public class CoreServiceImpl implements CoreService {
                 logger.info("receive a none text message, type is: " + msgType);
             } else {
                 String content = requestMap.get("Content");
+                respMessage = clientMessageProcessor.processClientMessage(content, fromUserName);
+                textMessage.setContent(respMessage);
+                respMessage = MessageUtil.textMessageToXml(textMessage);
                 logger.info("receive text message from: " + fromUserName + "and the content is: " + content);
             }
 

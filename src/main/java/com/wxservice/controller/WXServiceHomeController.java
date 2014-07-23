@@ -43,7 +43,7 @@ public class WXServiceHomeController {
         }
         response.setCharacterEncoding("UTF-8");
         String respMessage = coreService.processRequest(request);
-        logger.debug("response message is " + respMessage);
+        logger.info("response message is " + respMessage);
 
         PrintWriter out = null;
         try {

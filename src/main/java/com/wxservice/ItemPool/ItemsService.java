@@ -8,4 +8,5 @@ import java.util.Map;
 
 public interface ItemsService {
     void loadItems() throws IOException;
+    Map<Integer, Item> getQuestionSet();
 }
