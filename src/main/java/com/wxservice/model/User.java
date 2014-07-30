@@ -2,36 +2,66 @@ package com.wxservice.model;
 
 public class User {
     private String innerId;
-    private String id;
-    private String name;
+    private String outterId;
+    private String nickName;
+    private String currentQuestionSet;
+    private String questionSequence;
+    private String answers;
+    private int    finishIndex;
 
-    public User(String innerId, String id, String name) {
+    public User(String innerId) {
         this.innerId = innerId;
-        this.id = id;
-        this.name = name;
     }
 
     public String getInnerId() {
         return innerId;
     }
 
-    public void setInnerId(String innerId) {
-        this.innerId = innerId;
+    public String getOutterId() {
+        return outterId;
     }
 
-    public String getId() {
-        return id;
+    public void setOutterId(String outterId) {
+        this.outterId = outterId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getNickName() {
+        return nickName;
     }
 
-    public String getName() {
-        return name;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCurrentQuestionSet() {
+        return currentQuestionSet;
+    }
+
+    public void setCurrentQuestionSet(String currentQuestionSet) {
+        this.currentQuestionSet = currentQuestionSet;
+    }
+
+    public String getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(String answers) {
+        this.answers = answers;
+    }
+
+    public int getFinishIndex() {
+        return finishIndex;
+    }
+
+    public void setFinishIndex(int finishIndex) {
+        this.finishIndex = finishIndex;
+    }
+
+    public String getQuestionSequence() {
+        return questionSequence;
+    }
+
+    public void setQuestionSequence(String questionSequence) {
+        this.questionSequence = questionSequence;
     }
 }
